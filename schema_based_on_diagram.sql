@@ -28,3 +28,22 @@ CREATE TABLE medical_history_treatments (
     medical_history_id  INT REFERENCES medical_histories(id),
     treatment_id        INT REFERENCES treatments(id)
 );
+
+-- Create table Invoices
+CREATE TABLE invoices (
+    id SERIAL PRIMARY KEY,
+    total_amount FLOAT,
+    generated_at TIMESTAMP,
+    payed_at TIMESTAMP,
+    medical_history_id INT REFERENCES medical_histories(id)
+);
+
+-- Create table invoice_items
+CREATE TABLE invoice_items (
+    id SERIAL PRIMARY KEY,
+    unit_price FLOAT,
+    quantity INT,
+    total_price FLOAT,
+    invoice_id INT REFERENCES invoices(id),
+    treatment_id INT REFERENCES treatments(id)
+);
